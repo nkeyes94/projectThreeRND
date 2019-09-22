@@ -14,7 +14,10 @@ $(document).ready(function(){
     $runBtn.on("click", function(){                    // ? When clicked...
         console.log("Run btn hit");                    // ? ...Log the event...
         recognition.start();                           // ? ...Start the voice recognition.
-    })
+    });
+
+    // * Need a global var to save the user input to
+    const userInput ="";
 
     // * Getting the speech recognition packages
     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
@@ -35,7 +38,20 @@ $(document).ready(function(){
     recognition.onresult = function(e){
         var last = e.results.length - 1;                // ? Get the last result
         var command = e.results[last][0].transcript;    // ? Get the last result's transcript
+        var userInput = command.trim().toLowerCase();   // ? Save the transcript to the global
         console.log("Voice input: " + command);         // ? Console log the transcript
+
+        // * Command checking
+        // * After a command is made, we should check it against our command arrays
+            // TODO: Find a more effecient way to do this
+            // TODO: Look into using FS, and saving these commands to individual text files
+        if(greetings.includes(userInput)){
+            console.log("Found in arr");
+            var selector = randomNum(greetings);
+            console.log(greetings[selector]);
+        } else {
+            console.log("Not found");
+        }
     };
 
     // * Once voice input is no longer detected, stop the recognition software
@@ -55,15 +71,20 @@ $(document).ready(function(){
 
     // * We can now begin to configure different commands with the voice recognition
 
-    // * First we should clean up the text input.
-    const userInput = command.trim().toLowerCase();
+    // * For statements, we can make a random number generator.
+    function randomNum(arr){                                            // ? The arr takes the argument of an arr...
+        var randomNumber = Math.floor(Math.random() * arr.length);      // ? ...then gets it's length for the maximum cap on the random function
+        return randomNumber;                                            // ? And returns a random number generated from this
+    }
+
+    // TODO: Program different functions and commands based around the input text.
 
     // * An array of greetings
     const greetings = [
         "hello",
         "hi",
-        "whats up?"
+        "whats up?",
+        "hey"
     ];
-
 
 })

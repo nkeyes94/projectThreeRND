@@ -1,4 +1,5 @@
-September 22, 2019 -- Facial recognition is working!
+September 22, 2019 -- Facial recognition is working! Onto voice recognition
+
     -I was able to get facial detection working in another project which I was testing on, now I'm going to work at importing it to this project
     -Facial recognition successfully added to the project!
         -Need to find a way to allow for logging in
@@ -16,9 +17,17 @@ September 22, 2019 -- Facial recognition is working!
     -Began configuration of another recognition, which is to be built into browsers
         -speechRecognition webpack
         -NOTE ***** THIS WEBPACK ONLY WORKS FOR CHROME AND FIREFOX. *****
+        -Using this with another browser may result in "Error: Network" thus not allowing the webpack to work
+    -Began configuring different commands for the voice recognition
+        -Need more functions programmed for it to have a wide use
+        -Greetings are currently implemented
+            -If a user inputs a greeting, they will be returned a random greeting from an array
+    -Created a logs directory
+        -This will aid in seeing which commmands are being used successfully
 
 **********************************************************************************************************************************
 September 21, 2019 (Do you remember the 21st of September?) -- Facial Recognition (cont)
+
     -In order to use Facial recognition, need to install the following:
         npm install --production windows-build-tools
             -This is a package which allows tensorflow to work correctly, getting resources from python
@@ -46,6 +55,7 @@ September 21, 2019 (Do you remember the 21st of September?) -- Facial Recognitio
 
 **********************************************************************************************************************************
 September 20, 2019 -- Facial recognition
+
     -Added further configuration to the server.js file, including:
         -Handlebars (To be replaced with react!)
         -MySQL (To be replaced with MongoDB)
@@ -67,6 +77,7 @@ September 20, 2019 -- Facial recognition
 
 **********************************************************************************************************************************
 September 18, 2019 -- Initialization:
+
     -Created the "server.js"
         -Configured the server here using express.
     -Created "neuralNet.js"
