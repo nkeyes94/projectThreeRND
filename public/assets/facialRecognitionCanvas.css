@@ -1,4 +1,3 @@
-/* * This is the body css config taken from documentation */
 body {
     margin: 0;
     padding: 0;
@@ -10,7 +9,7 @@ body {
     flex-direction: column
 }
 
-/* * This is the canvas config taken from documentation */
+
 canvas {
     position: absolute;
 }

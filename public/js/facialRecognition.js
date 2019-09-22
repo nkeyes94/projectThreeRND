@@ -1,4 +1,6 @@
+// * Ensuring that the file is being loaded
 console.log("hello world");
+// * Document ready
 $(document).ready(function(){
     console.log("Hitting the file: facialRecognition.js");
 
@@ -22,9 +24,9 @@ $(document).ready(function(){
         cameraImage.addEventListener("change", async function(){
             const image = await faceapi.bufferToImage(cameraImage.files[0]);    // ? Takes the image and turns it into a file to be read by the net 
             const detect = await faceapi        // ? Detecting the face in the image
-                .detectAllFaces(image)
-                .withFaceLandmarks()
-                .withFaceDescriptors();
+                .detectAllFaces(image)          // ? Passing the image to the detection API
+                .withFaceLandmarks()            // ? Using Landmark to locate the face(s)
+                .withFaceDescriptors();         // ? This adds the tag to the canvas for the API (ie a name)
 
             // * To view the image that was uploaded...
             document.body.append(image);
@@ -65,7 +67,7 @@ $(document).ready(function(){
     }
 
     function loadProperLabels() {
-
+        //TODO: Finish the labels for this
     }
 
 });

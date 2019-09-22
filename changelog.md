@@ -1,3 +1,7 @@
+September 22, 2019 -- Facial recognition is working!
+    -I was able to get facial detection working in another project which I was testing on, now I'm going to work at importing it to this project
+    
+**********************************************************************************************************************************
 September 21, 2019 (Do you remember the 21st of September?) -- Facial Recognition (cont)
     -In order to use Facial recognition, need to install the following:
         npm install --production windows-build-tools

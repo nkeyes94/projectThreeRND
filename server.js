@@ -9,15 +9,15 @@ var faceapi = require("face-api.js");
 // * App configuration
 var app = express();
 
-// * Middleware config
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static("public"));
-
 // * Handlebars config
 // ! Note: This should be changed to React
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
+
+// * Middleware config
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static("public"));
 
 // * Passport config
 // ! Temporarily disabled for testing
