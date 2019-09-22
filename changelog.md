@@ -1,4 +1,30 @@
+September 21, 2019 (Do you remember the 21st of September?) -- Facial Recognition (cont)
+    -In order to use Facial recognition, need to install the following:
+        npm install --production windows-build-tools
+            -This is a package which allows tensorflow to work correctly, getting resources from python
 
+    -Changes to the facialRecognition.js file will be incoming in a future build:
+        -Need to change the static image to a video and allow for the use of the webcam
+            -In the HTML file:
+                <video id="video" width="720" height="560" autoplay mute>
+            -In the JS file I've already done the code for this, code located:
+                [here](resources/videoRecognition.js)
+
+    -Configured Handlebars in order to perform testing without getting client side erorrs (ie "require is not defined")
+        -Handlebars will need to be changed over to react in the future
+        -Imported required script and packages in [main](views/layouts/main.handlebars)
+
+    -Created the public folder for use of front end JS
+    -Linked the public folder in the server.js file
+    -Created the "resources' folder in order to keep track of materials needed in the future 
+    -Added a PDF book of Neural Network Design
+    -Began using TensorFlow.JS 
+        -TensorFlow.JS is a package that allows for easier deep learning and NN configuration
+        -This is a time saver, despite needing the learn how to use TF, this will save me time from training AI myself
+        -AI training can take ~1000 hrs
+        -TF works with facial recognition
+
+**********************************************************************************************************************************
 September 20, 2019 -- Facial recognition
     -Added further configuration to the server.js file, including:
         -Handlebars (To be replaced with react!)

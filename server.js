@@ -2,8 +2,9 @@
 var express = require("express");
 var session = require("express-session");
 var mysql = require("mysql") // ! Note: This should be changed to MongoDB
-// var passport = require("./config/passport");
+var passport = require("./config/passport");
 var exphbs = require("express-handlebars"); // ! Note: This should be changed to React
+var faceapi = require("face-api.js");
 
 // * App configuration
 var app = express();
@@ -20,15 +21,16 @@ app.set("view engine", "handlebars");
 
 // * Passport config
 // ! Temporarily disabled for testing
-// app.use(session({ secret: "the blue dog jumps over the red moon", resave: true, saveUninitialized: true }));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(session({ secret: "the blue dog jumps over the red moon", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // * Requiring our route file
-const routes = require("./routes/routes.js");
+const routes = require("./routes/routes.js")(app);
 
 var PORT = process.env.PORT || 8080;
 
 app.listen(PORT, function(){
     console.log("Application listening on localhost:/"+ PORT);
-})
+});
