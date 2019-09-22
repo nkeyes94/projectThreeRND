@@ -5,6 +5,7 @@ var mysql = require("mysql") // ! Note: This should be changed to MongoDB
 var passport = require("./config/passport");
 var exphbs = require("express-handlebars"); // ! Note: This should be changed to React
 var faceapi = require("face-api.js");
+var VSR = require("voice-speech-recognition");
 
 // * App configuration
 var app = express();
@@ -20,11 +21,11 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // * Passport config
-// ! Temporarily disabled for testing
 app.use(session({ secret: "the blue dog jumps over the red moon", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+module.exports = VSR;
 
 // * Requiring our route file
 const routes = require("./routes/routes.js")(app);

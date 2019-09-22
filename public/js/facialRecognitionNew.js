@@ -30,13 +30,13 @@ $(document).ready(function(){
         return results.map(res => res.forSize(width, height))
       }
       
-        
+      // * This function will return a box around the users face upon detection
       function drawDetections(dimensions, canvas, detections) {
         const resizedDetections = resizeCanvasAndResults(dimensions, canvas, detections)
         faceapi.drawDetection(canvas, resizedDetections)
       }
       
-        
+      // * This function looks at a users facial landmarks and maps them (giving the green overlay)
       function drawLandmarks(dimensions, canvas, results, withBoxes = true) {
         const resizedResults = resizeCanvasAndResults(dimensions, canvas, results)
         if (withBoxes) {
@@ -66,6 +66,7 @@ $(document).ready(function(){
           setTimeout(() => onPlay())
       }
       
+      // * Loading some required scripts to have the facial recognition work
       async function run() {
          await faceapi.loadTinyFaceDetectorModel('https://hpssjellis.github.io/face-api.js-for-beginners/')
          await faceapi.loadFaceLandmarkTinyModel('https://hpssjellis.github.io/face-api.js-for-beginners/')

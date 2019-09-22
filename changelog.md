@@ -1,6 +1,22 @@
 September 22, 2019 -- Facial recognition is working!
     -I was able to get facial detection working in another project which I was testing on, now I'm going to work at importing it to this project
-    
+    -Facial recognition successfully added to the project!
+        -Need to find a way to allow for logging in
+            -Perhaps setting some sort of ID, passing it into BCrypt for encryption then allowing users to login with that
+    -Starting work on voice recognition
+        -Using VSR (Voice Speech Recognition) by MIT
+        -[Documentation](https://www.npmjs.com/package/voice-speech-recognition)
+        -Created a new route "/voice"
+        -Created a new handlebars page "voiceRecognition.handlebars"
+        -The route is successfully rendering the handlebars page
+    -Created voiceRecognition.js in /public/js
+        -[link](/public/js/voiceRecognition.js)
+    -Moved the script location for the facial recognition into it's HTML document (home.handlebars), as this was causing other pages to error out with a 404.
+    -Ran into issues using VSR. As it's a node module, getting it to the front end isn't working all too well.
+    -Began configuration of another recognition, which is to be built into browsers
+        -speechRecognition webpack
+        -NOTE ***** THIS WEBPACK ONLY WORKS FOR CHROME AND FIREFOX. *****
+
 **********************************************************************************************************************************
 September 21, 2019 (Do you remember the 21st of September?) -- Facial Recognition (cont)
     -In order to use Facial recognition, need to install the following:
