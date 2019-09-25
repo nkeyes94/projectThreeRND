@@ -31,7 +31,6 @@ app.use(session({ secret: "the blue dog jumps over the red moon", resave: true, 
 app.use(passport.initialize());
 app.use(passport.session());
 
-module.exports = VSR;
 
 // * Requiring our route file
 const routes = require("./routes/routes.js")(app);

@@ -45,12 +45,19 @@ $(document).ready(function(){
         // * After a command is made, we should check it against our command arrays
             // TODO: Find a more effecient way to do this
             // TODO: Look into using FS, and saving these commands to individual text files
-        if(greetings.includes(userInput)){
-            console.log("Found in arr");
-            var selector = randomNum(greetings);
+        if(greetings.includes(userInput)){                          // ? If the user commmand is in the greetings arr
+            console.log("Found in greetings");                      // ? Log that it's been found 
+            var selector = randomNum(greetings);                    // ? Return a randomly generated greeting
             console.log(greetings[selector]);
+        } else if(commands.includes(userInput)){                    // ? If the user command is found in the command arr
+            console.log("Found in commands");                       // ? Log that it was found
+            var index = commands.indexOf(userInput);                // ? Find the command's index in the arr
+            console.log(index);                                     // ? Log the index
+            console.log(commandFunctions[index]);                   // ? Then put the index back into the array
+        } else if(command.includes("what is the weather in")){      // ? If the user command includes a request for weather
+            getWeather(command);                                    // ? Launch the weather function (line 132)
         } else {
-            console.log("Not found");
+            console.log("Undefined");                               // ? Otherwise if the command can't be found, return undefined
         }
     };
 
@@ -86,5 +93,74 @@ $(document).ready(function(){
         "whats up?",
         "hey"
     ];
+
+    // * Known commands
+    const commands = [
+        "what time is it",
+        "what is today's date",
+        "what is the weather in"
+    ]
+
+    // * The correlating functions for the previous commands arr
+    const commandFunctions = [
+        getTime(),                                                    // ? Function to get the time (Line 116)
+        getDate(),                                                    // ? Function to get the date (Line 123)
+    ]
+
+    // * Might be beneficial to have different arrays to hold different but related commands.
+    // * This way we can search for specific keywords in a user input and launch an appropriate command
+    const weatherCommands = [
+        "what is the weather in"
+    ]
+
+    // ***************************************************************************************************************************
+    // TODO: CUSTOM FUNCTIONS LISTED BELOW
+    // ***************************************************************************************************************************
+
+    // * Simple function for getting the time.
+    function getTime(){
+        var today = new Date();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        return time;
+    }
+
+    // * Simple function for getting the date.
+    function getDate(){
+        var today = new Date();
+        var date = today.getMonth() + "-" + today.getDate() + "-" + today.getFullYear();
+        return date;
+    };
+
+    // * Weather function
+    // ? The weather command is "What is the weather in <location>"
+    // ? First we need to get the location
+    function getWeather(string){
+        var n = string.split(" ");                      // ? Turn the expression into an arr
+        var lastWord = n.pop();                         // ? Pop to remove/return the last element. The last element will be our location
+        console.log("Last word test: "+ lastWord);      // ? Testing the last element
+                                                        // ! ^---This line can be removed for production version
+
+        var modifiedExpression = n.splice(0, n.length); // ? Splice the array to remove the last element
+        console.log(modifiedExpression);                // ? Testing the array
+                                                        // ! ^---This line can be removed for production version
+
+        // * Now that we have the last word, we can test further
+        // * Since for the weather command, the last word is the location, we can pass that into an API. 
+        var weatherApiKey = "45fcf52b47d79723b15c821561fb0595";
+        // * QueryURL lastWord var is the location in the command.
+        var queryURL = "http://api.openweathermap.org/data/2.5/weather?q="+ lastWord +"&units=imperial&APPID="+ weatherApiKey;
+        $.ajax({
+            url: queryURL,                              // ? Send the request to the queryURL above
+            method: "GET"
+        }).then(
+            function(response){                         
+                console.log(response);
+                console.log("The weather in "+ response.name + " is..")         // ? Return the response name
+                console.log(response.weather[0].description);                   // ? Description of the weather (rain, partly cloudy, etc)
+                console.log("With a temperature of: "+ response.main.temp);     // ? And temperature in F
+            }
+        )
+    };
+    
 
 })

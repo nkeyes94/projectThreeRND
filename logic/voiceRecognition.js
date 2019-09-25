@@ -1,28 +1,27 @@
 $(document).ready(function(){
+    var testString = "what is the weather in Philadelphia";
 
-    var VSR = require("voice-speech-recognition");
-    var config = {
-        continuous: true, // default: true, interval: {true, false}
-        interimResults: true, // default: true, interval: {true, false}
-        maxAlternatives: 1, // default: 1, interval {1, 2, 3, 4, ...}
-        lang: 'en-US', // default: 'en-US', one of language localisation
-        grammars: undefined, // default: new SpeechGrammarList()
-        serviceURI: undefined, // default: undefined
+    function modifyString(string){
+        var n = string.split(" ");                      // ? Turn the expression into an arr
+        var lastWord = n.pop();                         // ? Pop to remove/return the last element
+        console.log("Last word test: "+ lastWord);      // ? Testing the last element
+
+        var modifiedExpression = n.splice(0, n.length); // ? Splice the array to remove the last element
+        console.log(modifiedExpression);                // ? Testing the array
+
+        // * Now that we have the last word, we can test further
+        // * Since for the weather command, the last word is the location, we can pass that into an API. 
+        var apiKey = "45fcf52b47d79723b15c821561fb0595"
+        var queryURL = "http://api.openweathermap.org/data/2.5/weather?lat=48.13&lon=17.12&APPID=45fcf52b47d79723b15c821561fb0595"
+        console.log("API Call... "+queryURL);
+
+        $.ajax({
+            URL: queryURL,
+            method: "GET"
+        }).then(function(data){
+            console.log(data);
+        })
     };
-     
-    var recognizer = VSR.voiceSpeechRecognition(config);
 
-    var text = recognizer.finalRecognizing;
-
-    // * Getting the div from the document to append text to
-    const testDiv = document.getElementById("testDiv");
-    testDiv.append(text);
-
-    // * Getting the button to run
-    var runBtn = document.getElementById("thisButton");
-    runBtn.on("click", function(){
-        console.log("Run btn hit");
-    })
-
-
-})
+    modifyString(testString);
+});

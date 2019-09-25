@@ -1,3 +1,17 @@
+September 25, 2019 -- APIs in voice recognition (cont)
+
+    -Starting research on the two technologies recommended by Bryan
+        -Sonus
+        -Google Voice Flow
+    -Implementing the optimized weather API command
+        -Command implemented and working with voice
+
+**********************************************************************************************************************************
+September 24, 2019 -- APIs in voice recognition
+
+    -Adjusted the algorithm that handles the voice command for checking the weather in a location
+        -Using Array functions made this optimal
+**********************************************************************************************************************************
 September 22, 2019 -- Facial recognition is working! Onto voice recognition
 
     -I was able to get facial detection working in another project which I was testing on, now I'm going to work at importing it to this project
