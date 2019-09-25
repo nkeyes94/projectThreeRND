@@ -5,6 +5,9 @@ September 25, 2019 -- APIs in voice recognition (cont)
         -Google Voice Flow
     -Implementing the optimized weather API command
         -Command implemented and working with voice
+    -Implementing AI voice responses with responsiveVoice
+        -To use this the function is simply:
+            responsiveVoice.speak("INSERT STRING HERE")
 
 **********************************************************************************************************************************
 September 24, 2019 -- APIs in voice recognition

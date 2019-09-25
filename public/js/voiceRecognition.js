@@ -1,9 +1,9 @@
-    //              *********************** 
-    //              *** Note before use ***
-    // ! This script will ONLY EXECUTE IN CHROME AND FIREFOX
-    // ! The webpack doesn't support other browsers
-    //              ***********************
-    //              ***********************
+    //                                          *********************** 
+    //                                          *** Note before use ***
+    //                          ! This script will ONLY EXECUTE IN CHROME AND FIREFOX
+    //                              ! The webpack doesn't support other browsers
+    //                                          ***********************
+    //                                          ***********************
 
 $(document).ready(function(){
 
@@ -114,13 +114,14 @@ $(document).ready(function(){
     ]
 
     // ***************************************************************************************************************************
-    // TODO: CUSTOM FUNCTIONS LISTED BELOW
+    //                                          TODO: CUSTOM FUNCTIONS LISTED BELOW
     // ***************************************************************************************************************************
 
     // * Simple function for getting the time.
     function getTime(){
         var today = new Date();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        responsiveVoice.speak("The current time is "+ time);
         return time;
     }
 
@@ -158,6 +159,9 @@ $(document).ready(function(){
                 console.log("The weather in "+ response.name + " is..")         // ? Return the response name
                 console.log(response.weather[0].description);                   // ? Description of the weather (rain, partly cloudy, etc)
                 console.log("With a temperature of: "+ response.main.temp);     // ? And temperature in F
+                responsiveVoice.speak("The current weather in "+ response.name +
+                ". The temperature is "+ response.main.temp +" degrees fahrenheit with "
+                + response.weather[0].description);
             }
         )
     };
