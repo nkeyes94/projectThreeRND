@@ -7,6 +7,7 @@ var exphbs = require("express-handlebars"); // ! Note: This should be changed to
 var faceapi = require("face-api.js");
 var VSR = require("voice-speech-recognition");
 var fs = require("fs");
+var cheerio = require("cheerio")(app);
 
 // * Getting date/time for logging
 var today = new Date();
@@ -43,3 +44,5 @@ app.listen(PORT, function(){
         if(err) throw err;
     })
 });
+
+module.exports = app;

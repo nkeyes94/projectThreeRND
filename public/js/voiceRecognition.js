@@ -34,6 +34,17 @@ $(document).ready(function(){
     recognition.lang = "en-US";                         // ? Setting the language to English-US
     recognition.interimResults = false;
 
+    // * Setting up a second recognition call. This one is for interracting with the AI better
+    var dialogue = new SpeechRecognition();
+    var dialogueList = new SpeechGrammarList();
+    dialogueList.addFromString(grammar, 1);
+    dialogue.lang = "en-US";
+    dialogue.interimResults = false;
+
+    dialogue.onspeechend = function(){
+        dialogue.stop();
+    }
+
     // * Creating a function for when a command is entered
     recognition.onresult = function(e){
         var last = e.results.length - 1;                // ? Get the last result
@@ -48,6 +59,7 @@ $(document).ready(function(){
         if(greetings.includes(userInput)){                          // ? If the user commmand is in the greetings arr
             console.log("Found in greetings");                      // ? Log that it's been found 
             var selector = randomNum(greetings);                    // ? Return a randomly generated greeting
+            responsiveVoice.speak(greetings[selector]);             // ? Issue a voice response for the greeting
             console.log(greetings[selector]);
         } else if(commands.includes(userInput)){                    // ? If the user command is found in the command arr
             console.log("Found in commands");                       // ? Log that it was found
@@ -58,6 +70,8 @@ $(document).ready(function(){
             getWeather(command);                                    // ? Launch the weather function (line 132)
         } else {
             console.log("Undefined");                               // ? Otherwise if the command can't be found, return undefined
+            // ? Issue a response if the command is undefined
+            responsiveVoice.speak("I'm sorry, I don't understand your command");
         }
     };
 
@@ -99,6 +113,10 @@ $(document).ready(function(){
         "what time is it",
         "what is today's date",
         "what is the weather in"
+    ]
+
+    const codingAsist = [
+        "make a for loop",
     ]
 
     // * The correlating functions for the previous commands arr
@@ -165,6 +183,83 @@ $(document).ready(function(){
             }
         )
     };
+
+    // * Testing the coding assistant functionality.
+        // ? The idea behind this is having a coding assistant. This can be a reference for coding. 
+        // ? Other functions can be added to this
+            // TODO: Once the response comes throguh, create a popup window
+            // TODO: The popup window should display the code and have a "copy to clipboard" button
+    function createForLoop(stirng){
+        responsiveVoice.speak("Okay! Creating for loop.");                      // ? Acknowledge command
+        responsiveVoice.speak("How many iterations would you like to do?")
+            .then(recognitionStart())
+            .then(function(command){
+                responsiveVoice.speak("Creating a loop with "+ command +" iterations.");
+            })
+
+    }
+
+    // * News
+        // ? A user may want to check headlines for that day
+        // ? By saying a command, return 10 headlines
+        // ? Put the headlines into an arr, and ask the user if they'd like to hear more about the stories
+            // ? If yes, read a summary of the story
+    
+    // * Recipies
+        // ? Allow the user to search for recipies with their voice
+        // ? Have the AI read out ingredients & instructions
+        // ? Allow the ingredients to be added to your shopping list
+            // ! Find a way to text the contents of the shopping list to the users phone
+    // * Test button to activate
+    var btn = document.createElement("BUTTON");
+    btn.innerHTML="Recipe Test";
+    var tdiv = document.getElementById("testDiv");
+    tdiv.append(btn);
+    btn.onclick = function(){
+        getRecipies();
+    }
+    // * Need a test string to get started
+    var testCommand = "Search for recipies";
+    var testRecipe = "Pizza";
+
+    function getRecipies(){
+        // * Call back config for dialogue
+        function voiceStartCallback() {
+            console.log("Voice started");
+        }
+         
+        function voiceEndCallback() {
+            console.log("Voice ended");
+        }
+         
+        var dialogueParameters = {
+            onstart: voiceStartCallback,
+            onend: voiceEndCallback
+        }
+        responsiveVoice.speak("Okay. Which recipe do you wish to search for?", dialogueParameters)
+        console.log("is playing?" + responsiveVoice.isPlaying())
+        var playState = responsiveVoice.isPlaying();
+        if(playState == false){
+            console.log("Playing audio...");
+        } else if(playState == true){
+            console.log("Not playing")
+            
+            console.log("is playing 2: "+ responsiveVoice.isPlaying())
+            dialogue.start();
+
+            dialogue.onresult = function(e){
+                var last = e.results.length - 1;                // ? Get the last result
+                var command = e.results[last][0].transcript;    // ? Get the last result's transcript
+                var userInput = command.trim().toLowerCase();   // ? Save the transcript to the global
+                console.log("Voice input: " + command);         // ? Console log the transcript
+            }
+        }
+            
+            
+        }
+        // * API Config
+        var queryURL = "https://api.edamam.com/search"
+        var recipeSearch;                                                       // ? Save the recipe the user wants to search for
     
 
 })

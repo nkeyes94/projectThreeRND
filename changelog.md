@@ -1,3 +1,14 @@
+September 26, 2019 -- APIs in voice recognition (cont)
+
+    -Began implementing a recipies API (WIP)
+        -This function will allow a user to search for recipies with their voice
+        -It will list off ingredients & directions
+        -Allow for the user to create or add ingredients to their shopping list
+            -Need to find an API which can send a text message to the user with their list
+    -Created another voice module, "dialogue"
+        -Dialogue is a seperate recorded using the webkit, which will allow for better interactions with the program
+        -Works the same as voiceRecognition
+**********************************************************************************************************************************
 September 25, 2019 -- APIs in voice recognition (cont)
 
     -Starting research on the two technologies recommended by Bryan
