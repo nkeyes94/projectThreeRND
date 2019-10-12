@@ -1,0 +1,14 @@
+    const jawOutline = landmarks.getJawOutline()
+    const nose = landmarks.getNose()
+    const mouth = landmarks.getMouth()
+    const leftEye = landmarks.getLeftEye()
+    const rightEye = landmarks.getRightEye()
+    const leftEyeBbrow = landmarks.getLeftEyeBrow()
+    const rightEyeBrow = landmarks.getRightEyeBrow()
+    console.log("Jaw outline: "+ jawOutline);
+    console.log("Nose outline"+ nose);
+    console.log("Mouth outline: "+ mouth);
+    console.log("Left eye outline: "+ leftEye);
+    console.log("Right eye outline: "+ rightEye);
+    console.log("Right brow: "+ rightEyeBrow);
+    console.log("Left brow: "+ leftEyeBbrow);

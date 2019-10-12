@@ -11,5 +11,10 @@ module.exports = function(app) {
         console.log("Hit the voice route");     // ? Upon hitting the route, console log...
         res.render("voiceRecognition");         // ? ... thren render the voice recognition page
     });
+
+    app.get("/test", function(req, res){
+        console.log("Hit the test route");
+        res.render("test");
+    })
     
 };

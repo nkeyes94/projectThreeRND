@@ -128,7 +128,10 @@ $(document).ready(function(){
     // * Might be beneficial to have different arrays to hold different but related commands.
     // * This way we can search for specific keywords in a user input and launch an appropriate command
     const weatherCommands = [
-        "what is the weather in"
+        "what is the weather in",
+        "what's the weather in",
+        "whats the weather in",
+        "tell me the weather for"
     ]
 
     // ***************************************************************************************************************************

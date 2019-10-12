@@ -8,6 +8,7 @@ var faceapi = require("face-api.js");
 var VSR = require("voice-speech-recognition");
 var fs = require("fs");
 var cheerio = require("cheerio")(app);
+var cors = require("cors");
 
 // * Getting date/time for logging
 var today = new Date();
@@ -31,6 +32,9 @@ app.use(express.static("public"));
 app.use(session({ secret: "the blue dog jumps over the red moon", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+// * CORs config
+app.use(cors());
 
 
 // * Requiring our route file
