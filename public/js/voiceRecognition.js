@@ -68,7 +68,10 @@ $(document).ready(function(){
             console.log(commandFunctions[index]);                   // ? Then put the index back into the array
         } else if(command.includes("what is the weather in")){      // ? If the user command includes a request for weather
             getWeather(command);                                    // ? Launch the weather function (line 132)
-        } else {
+        } else if(command.includes("open")){      // ? If the user command includes a request for weather
+            console.log("Found in commands");
+            openSite(userInput);                                    // ? Launch the weather function (line 132)
+        }else {
             console.log("Undefined");                               // ? Otherwise if the command can't be found, return undefined
             // ? Issue a response if the command is undefined
             responsiveVoice.speak("I'm sorry, I don't understand your command");
@@ -112,7 +115,8 @@ $(document).ready(function(){
     const commands = [
         "what time is it",
         "what is today's date",
-        "what is the weather in"
+        "what is the weather in",
+        "open"
     ]
 
     const codingAsist = [
@@ -123,6 +127,7 @@ $(document).ready(function(){
     const commandFunctions = [
         getTime(),                                                    // ? Function to get the time (Line 116)
         getDate(),                                                    // ? Function to get the date (Line 123)
+        openSite(),                                                   // ? Function to open a website (Line 162)
     ]
 
     // * Might be beneficial to have different arrays to hold different but related commands.
@@ -150,7 +155,16 @@ $(document).ready(function(){
     function getDate(){
         var today = new Date();
         var date = today.getMonth() + "-" + today.getDate() + "-" + today.getFullYear();
+        responsiveVoice.speak("Todays date is "+ date);
         return date;
+    };
+
+    // * Open a website.
+    function openSite(string){
+        var n = string.split(" ");                      // ? Turn the expression into an arr
+        var lastWord = n.pop();                         // ? Pop to remove/return the last element. The last element will the website
+        responsiveVoice.speak("Opening" + lastWord);    // ? Responding voice with the website to open
+        window.open("http://www." + lastWord);          // ? Opening the website requested in a new tab
     };
 
     // * Weather function
