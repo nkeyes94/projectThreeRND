@@ -1115,6 +1115,6 @@ var unshiftBatchFive = [
 
                 var distance = [];
                     for(let i = 0; i < batchEight.length; i++){
-                        distance[i] = unshiftBatchThree[i]._x - unshiftBatchThree[i]._y;
+                        distance[i] = unshiftBatchFour[i]._x - unshiftBatchFour[i]._y;
                         console.log(distance[i]);
                     }
