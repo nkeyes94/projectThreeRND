@@ -22,7 +22,7 @@ app.use(express.static(viewsDirectory));
 
 // * Serving our "PUBLIC" directory
     // ! webCamFaceRecog/public
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "./public")));
 
 // * Serving our "IMAGES" directory
     // ! webcamFaceRecog/images
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, "../images")));
     // ? These are essentially:
         // ? Different models for the detection/recognition
         // ? Different functions/algorithms used in detection
-app.use(express.static(path.join(__dirname, "../weights")));
+app.use(express.static(path.join(__dirname, "./weights")));
 
 // * Serving the "dist" directory
     // ! webCamRecog/dist
