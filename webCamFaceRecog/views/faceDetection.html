@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- * Importing our required scrips -->
+    <!-- ? FaceAPI - MAIN -->
+    <script src="face-api.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</head>
+<body>
+
+    <!-- * Webcam input -->
+    <div style="position: relative" class="margin">
+            <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
+            <canvas id="overlay" />
+    </div>
+    
+    
+</body>
+</html>
+
+<script>
+    async function onPlay(){
+        const videoElement = $("inputVideo").get(0);
+
+        if(videoElement.paused || videoElement.ended || !faceDetectModelLoaded())
+            return setTimeout(() => onPlay())
+
+        const option = getFaceDetectorOption();
+
+        const result = await faceapi.detectSingleFace(videoElement, options);
+
+        if(result){
+            const canvas = $("#overlay").get(0);
+            const dims = faceapi.matchDimensions(canvas, videoElement, true)
+            faceapi.draw.drawDetections(canvas, faceapi.resizeResults(results, dims))
+        }
+    }
+</script>
