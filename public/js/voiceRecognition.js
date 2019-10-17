@@ -68,6 +68,14 @@ $(document).ready(function(){
             console.log(commandFunctions[index]);                   // ? Then put the index back into the array
         } else if(command.includes("what is the weather in")){      // ? If the user command includes a request for weather
             getWeather(command);                                    // ? Launch the weather function (line 132)
+        } else if(command.includes("open")){                        // ? If the user command has "open" in it
+            openSite(userInput);                                    // ? Launch the open external website function (Line 162)
+        } else if(command.includes("show me recipes for")){         // ? If the user command has "show me recipes for" in it
+            recipeSearch(userInput);                                    // ? Launch the recipe search function (Line 178)
+        } else if(command.includes("search for")){                  // ? If the user command has "search for" in it
+            recipeSearch(userInput);                                    // ? Launch the recipe search function (Line 178)                             
+        } else if(command.includes("show me")){                     // ? If the user command has "show me" in it
+            recipeSearch(userInput);                                    // ? Launch the recipe search function (Line 178)                             
         } else {
             console.log("Undefined");                               // ? Otherwise if the command can't be found, return undefined
             // ? Issue a response if the command is undefined
@@ -112,7 +120,11 @@ $(document).ready(function(){
     const commands = [
         "what time is it",
         "what is today's date",
-        "what is the weather in"
+        "what is the weather in",
+        "open",
+        "show me recipes for",
+        "search for",
+        "show me"
     ]
 
     const codingAsist = [
@@ -123,6 +135,8 @@ $(document).ready(function(){
     const commandFunctions = [
         getTime(),                                                    // ? Function to get the time (Line 116)
         getDate(),                                                    // ? Function to get the date (Line 123)
+        openSite(),                                                   // ? Function to open an external website (Line 162)
+        recipeSearch(),                                               // ? Function to search recipes (Line 178)
     ]
 
     // * Might be beneficial to have different arrays to hold different but related commands.
@@ -150,8 +164,34 @@ $(document).ready(function(){
     function getDate(){
         var today = new Date();
         var date = today.getMonth() + "-" + today.getDate() + "-" + today.getFullYear();
+        responsiveVoice.speak("Todays date is "+ date);
         return date;
     };
+
+    // * Open a website
+    // ? The command to open an external website is "open <web address>" i.e. "open google.com"
+    // ? First we seperate the website
+    // ? Then CAIT say "opening <website>"
+    // ? Then a new tab opens with the requested site
+    function openSite(string){
+        var n = string.split(" ");                      // ? Turn the expression into an arr
+        var lastWord = n.pop();                         // ? Pop to remove/return the last element. The last element will the website
+        responsiveVoice.speak("Opening " + lastWord);   // ? Responding voice with the website to open
+        console.log("Opening", lastWord);
+        window.open("http://www." + lastWord);          // ? Opening the website requested in a new tab
+    };
+
+    // * My recipe search
+    function recipeSearch (string){
+        var n = string.toLowerCase().split(" ");                  // ? Turn the expression into an arr and lower case
+        var lastWord = n.pop()
+        if (lastWord === "recipes"){                                // ? Pulling the word before recipes to query
+            lastWord = n.pop()
+        } 
+        responsiveVoice.speak("recipes for" + lastWord);          // ? Responding voice with the recipes to open
+        console.log("Opening ", lastWord, " Recipe");
+        window.open("https://api.edamam.com/recipes/" + lastWord) // ? for now opens recipes in a new tab
+    }
 
     // * Weather function
     // ? The weather command is "What is the weather in <location>"
