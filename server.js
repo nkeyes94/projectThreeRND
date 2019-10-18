@@ -36,7 +36,6 @@ app.use(passport.session());
 // * CORs config
 app.use(cors());
 
-
 // * Requiring our route file
 const routes = require("./routes/routes.js")(app);
 
