@@ -39,7 +39,7 @@ $(document).ready(function() {
   const fullFaceDescriptions = await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceDescriptors()
       
       
-  const labels = ['Nathan1']
+  const labels = ['Nathan1', 'Rick1']
   
   const labeledFaceDescriptors = await Promise.all(
     labels.map(async label => {
